@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+build
+.env
+.env.local
+.env*.local
+*.log
+.DS_Store
+desktop.ini
+
+# Accidental duplicate copies
+client/server/
+server/client/

@@ -1,0 +1,51 @@
+# CI: server tests (MongoDB Memory Server), client build, lint.
+# First run may download MongoDB binary (~600MB) when MONGOMS cache misses; later runs reuse the cache.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MONGOMS_VERSION: "7.0.14"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: |
+            server/package-lock.json
+            client/package-lock.json
+
+      - name: Cache MongoDB Memory Server binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/mongodb-binaries
+          key: mongoms-${{ runner.os }}-${{ env.MONGOMS_VERSION }}
+          restore-keys: |
+            mongoms-${{ runner.os }}-
+
+      - name: Install server dependencies
+        working-directory: server
+        run: npm ci
+
+      - name: Install client dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Run CI (tests, build, lint)
+        run: npm run ci
+        env:
+          CI: true
+          MONGOMS_VERSION: "7.0.14"
+          NEXT_PUBLIC_API_URL: http://localhost:5000
+          NEXT_PUBLIC_BACKEND_URL: http://localhost:5000
+          BACKEND_URL: http://localhost:5000
+          OPENWEATHER_API_KEY: ""

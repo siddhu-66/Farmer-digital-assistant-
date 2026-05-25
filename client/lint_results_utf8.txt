@@ -1,0 +1,215 @@
+﻿
+> frontend@0.1.0 lint
+> eslint
+
+
+C:\Users\siddh\New folder\frontend\src\app\admin\page.tsx
+  4:51  warning  'Bell' is defined but never used          @typescript-eslint/no-unused-vars
+  4:67  warning  'ArrowUpRight' is defined but never used  @typescript-eslint/no-unused-vars
+  4:89  warning  'Download' is defined but never used      @typescript-eslint/no-unused-vars
+  4:99  warning  'ArrowLeft' is defined but never used     @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\admin\users\page.tsx
+  4:21  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+  4:49  warning  'CheckCircle' is defined but never used  @typescript-eslint/no-unused-vars
+  4:62  warning  'XCircle' is defined but never used      @typescript-eslint/no-unused-vars
+  4:71  warning  'Clock' is defined but never used        @typescript-eslint/no-unused-vars
+  9:11  warning  't' is assigned a value but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\admin\verifications\page.tsx
+   4:21  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+   4:45  warning  'MapPin' is defined but never used       @typescript-eslint/no-unused-vars
+  40:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+  98:32  warning  'i' is defined but never used            @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\business\messages\page.tsx
+   4:21  warning  'MessageSquare' is defined but never used  @typescript-eslint/no-unused-vars
+   9:38  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  10:42  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\app\business\page.tsx
+  11:3  warning  'ArrowLeft' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\business\post-contract\page.tsx
+   5:33  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+   5:46  warning  'FileText' is defined but never used     @typescript-eslint/no-unused-vars
+  30:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\business\procurement\page.tsx
+  4:44  warning  'CheckCircle2' is defined but never used  @typescript-eslint/no-unused-vars
+  9:11  warning  't' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\business\projections\page.tsx
+   9:11  warning  't' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  10:36  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\app\case-studies\page.tsx
+  3:3  warning  'Library' is defined but never used    @typescript-eslint/no-unused-vars
+  6:3  warning  'Lightbulb' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\collaboration\page.tsx
+  33:29  error  React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
+
+C:\Users\siddh\New folder\frontend\src\app\crops\page.tsx
+  6:3  warning  'Droplets' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\dashboard\page.tsx
+   28:56  error    Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+   29:10  warning  'marketPrices' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   29:58  error    Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  144:55  error    Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  145:55  error    Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  146:55  error    Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\app\forgot-password\page.tsx
+  27:79  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  35:46  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  64:19  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\siddh\New folder\frontend\src\app\market\page.tsx
+  8:3  warning  'Filter' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\page.tsx
+    8:3   warning  'CloudRain' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   24:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\siddh\New folder\frontend\src\app\page.tsx:24:5
+  22 |
+  23 |   useEffect(() => {
+> 24 |     setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
+     |     ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  25 |   }, []);
+  26 |
+  27 |   return (  react-hooks/set-state-in-effect
+  137:64  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-explicit-any
+  138:60  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-explicit-any
+  139:66  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-explicit-any
+  140:63  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\app\profile\page.tsx
+  6:3  warning  'User' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\register\page.tsx
+   5:3  warning  'Droplets' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+  26:7  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\siddh\New folder\frontend\src\app\register\page.tsx:26:7
+  24 |     const roleParam = searchParams.get('role');
+  25 |     if (roleParam === 'farmer' || roleParam === 'business' || roleParam === 'admin') {
+> 26 |       setRole(roleParam);
+     |       ^^^^^^^ Avoid calling setState() directly within an effect
+  27 |     }
+  28 |   }, [searchParams]);
+  29 |  react-hooks/set-state-in-effect
+
+C:\Users\siddh\New folder\frontend\src\app\report\page.tsx
+  49:49  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  49:68  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\siddh\New folder\frontend\src\app\residue\page.tsx
+  5:3  warning  'Recycle' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\signin\page.tsx
+  22:7   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\siddh\New folder\frontend\src\app\signin\page.tsx:22:7
+  20 |     const roleParam = searchParams.get('role');
+  21 |     if (roleParam === 'farmer' || roleParam === 'business' || roleParam === 'admin') {
+> 22 |       setRole(roleParam);
+     |       ^^^^^^^ Avoid calling setState() directly within an effect
+  23 |     }
+  24 |   }, [searchParams]);
+  25 |  react-hooks/set-state-in-effect
+  99:48  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\components\layout\Navbar.tsx
+  3:10  warning  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  3:21  warning  'useState' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\components\layout\Sidebar.tsx
+   3:10  warning  'useRouter' is defined but never used  @typescript-eslint/no-unused-vars
+  21:3   warning  'Activity' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\components\shared\AIAssistant.tsx
+  4:37  warning  'MessageSquare' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\components\shared\LanguageSelector.tsx
+  37:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\context\AuthContext.tsx
+  20:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\siddh\New folder\frontend\src\context\AuthContext.tsx:20:7
+  18 |     const savedRole = localStorage.getItem('userRole') as Role;
+  19 |     if (savedRole) {
+> 20 |       setRoleState(savedRole);
+     |       ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  21 |     }
+  22 |   }, []);
+  23 |  react-hooks/set-state-in-effect
+
+C:\Users\siddh\New folder\frontend\src\context\LanguageContext.tsx
+  20:7   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\siddh\New folder\frontend\src\context\LanguageContext.tsx:20:7
+  18 |     const savedLang = localStorage.getItem('language') as Language;
+  19 |     if (savedLang) {
+> 20 |       setLanguageState(savedLang);
+     |       ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  21 |     }
+  22 |   }, []);
+  23 |  react-hooks/set-state-in-effect
+  47:17  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+  75:45  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\lib\api.ts
+  15:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\services\businessService.ts
+  47:45  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  48:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  58:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  59:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  80:51  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  81:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  91:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\services\cropService.ts
+  24:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\services\marketService.ts
+  30:54  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  31:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 73 problems (38 errors, 35 warnings)
+

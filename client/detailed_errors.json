@@ -1,0 +1,235 @@
+{
+  "src/app/api/auth/signin/route.ts": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ')' expected."
+  ],
+  "src/app/api/crops/active/route.ts": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1435: Unknown keyword or identifier. Did you mean 'type'?"
+  ],
+  "src/app/api/crops/add/route.ts": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ')' expected."
+  ],
+  "src/app/api/dashboard/stats/route.ts": [
+    "error TS1005: ':' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1472: 'catch' or 'finally' expected."
+  ],
+  "src/app/api/market/prices/route.ts": [
+    "error TS1005: ';' expected.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ')' expected."
+  ],
+  "src/app/api/weather/route.ts": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected."
+  ],
+  "src/app/business/layout.tsx": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected."
+  ],
+  "src/app/collaboration/page.tsx": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1228: A type predicate is only allowed in return type position for functions and methods.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1005: ';' expected.",
+    "error TS1128: Declaration or statement expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1228: A type predicate is only allowed in return type position for functions and methods.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1228: A type predicate is only allowed in return type position for functions and methods.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1128: Declaration or statement expected."
+  ],
+  "src/app/market/page.tsx": [
+    "error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?",
+    "error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?",
+    "error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?",
+    "error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?",
+    "error TS1128: Declaration or statement expected."
+  ],
+  "src/app/signin/page.tsx": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected."
+  ],
+  "src/components/analytics/RecommendationForm.tsx": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1134: Variable declaration expected.",
+    "error TS1005: ';' expected.",
+    "error TS1128: Declaration or statement expected."
+  ],
+  "src/components/chat/FloatingAssistant.tsx": [
+    "error TS1134: Variable declaration expected.",
+    "error TS1005: ';' expected.",
+    "error TS1128: Declaration or statement expected."
+  ],
+  "src/components/forms/BusinessRegistrationForm.tsx": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected."
+  ],
+  "src/components/forms/FarmerRegistrationForm.tsx": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected.",
+    "error TS2457: Type alias name cannot be 'for'.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected."
+  ],
+  "src/components/forms/SellToBusinessForm.tsx": [
+    "error TS1005: ',' expected.",
+    "error TS1005: ':' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1005: ':' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1005: ':' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1005: ':' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1005: ':' expected.",
+    "error TS1005: '}' expected."
+  ],
+  "src/components/layout/MobileHeader.tsx": [
+    "error TS1005: '}' expected."
+  ],
+  "src/components/market/B2BRequestsList.tsx": [
+    "error TS1005: '=' expected.",
+    "error TS1005: '=' expected."
+  ],
+  "src/components/shared/AIAssistant.tsx": [
+    "error TS1134: Variable declaration expected.",
+    "error TS1005: ';' expected.",
+    "error TS1128: Declaration or statement expected."
+  ],
+  "src/context/LanguageContext.tsx": [
+    "error TS1005: '(' expected.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1434: Unexpected keyword or identifier.",
+    "error TS1359: Identifier expected. 'for' is a reserved word that cannot be used here.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected."
+  ],
+  "src/hooks/useBusinessSimulation.ts": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected."
+  ],
+  "src/hooks/useDashboardSimulation.ts": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1128: Declaration or statement expected.",
+    "error TS1005: ';' expected.",
+    "error TS1128: Declaration or statement expected."
+  ],
+  "src/lib/api.ts": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1005: ')' expected."
+  ],
+  "src/lib/payments.ts": [
+    "error TS1005: ':' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1005: ':' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1472: 'catch' or 'finally' expected.",
+    "error TS1005: '}' expected."
+  ],
+  "src/services/b2bService.ts": [
+    "error TS1131: Property or signature expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1011: An element access expression should take an argument.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ',' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1109: Expression expected.",
+    "error TS1109: Expression expected.",
+    "error TS1109: Expression expected.",
+    "error TS1109: Expression expected.",
+    "error TS1109: Expression expected.",
+    "error TS1128: Declaration or statement expected."
+  ],
+  "src/services/farmerRegistrationService.ts": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: '{' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1005: '}' expected."
+  ],
+  "src/services/marketService.ts": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected."
+  ],
+  "src/services/translationService.ts": [
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ')' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: '(' expected.",
+    "error TS1005: ';' expected.",
+    "error TS1005: ';' expected."
+  ],
+  "src/services/weatherService.ts": [
+    "error TS2427: Interface name cannot be 'if'."
+  ]
+}

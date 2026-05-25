@@ -1,0 +1,524 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  --color-primary: var(--theme-primary, #2E7D32);
+  --color-primary-light: var(--theme-primary-light, #66BB6A);
+}
+
+/* ========================================
+   MODERN AGRI-TECH MARKETPLACE DESIGN SYSTEM
+   ======================================== */
+:root {
+  /* Core Colors */
+  --agri-green-50: #f0fdf4;
+  --agri-green-100: #dcfce7;
+  --agri-green-200: #bbf7d0;
+  --agri-green-300: #86efac;
+  --agri-green-400: #4ade80;
+  --agri-green-500: #22c55e;
+  --agri-green-600: #16a34a;
+  --agri-green-700: #15803d;
+  --agri-green-800: #166534;
+  --agri-green-900: #14532d;
+  
+  /* Earth Tones */
+  --earth-yellow-50: #fefce8;
+  --earth-yellow-100: #fef9c3;
+  --earth-yellow-200: #fef08a;
+  --earth-yellow-300: #fde047;
+  --earth-yellow-400: #facc15;
+  --earth-yellow-500: #eab308;
+  --earth-yellow-600: #ca8a04;
+  --earth-yellow-700: #a16207;
+  --earth-yellow-800: #854d0e;
+  --earth-yellow-900: #713f12;
+  
+  /* Background & Surface */
+  --background: #FFFFFF;
+  --background-soft: #fafafa;
+  --background-gradient: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  --surface: #FFFFFF;
+  --surface-elevated: #ffffff;
+  --surface-overlay: rgba(255, 255, 255, 0.95);
+  
+  /* Text Colors */
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --text-inverse: #ffffff;
+  
+  /* Border & Shadow */
+  --border-color: #e5e7eb;
+  --border-hover: #d1d5db;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-green: 0 4px 14px 0 rgba(34, 197, 94, 0.15);
+  
+  /* Role-based Colors */
+  --role-farmer: var(--agri-green-600);
+  --role-business: #3b82f6;
+  --role-admin: var(--earth-yellow-600);
+  --role-salesman: #f97316;
+  
+  /* Status Colors */
+  --status-success: #22c55e;
+  --status-warning: #eab308;
+  --status-error: #ef4444;
+  --status-info: #3b82f6;
+  
+  /* Legacy Theme Variables */
+  --theme-primary: var(--agri-green-600);
+  --theme-primary-light: var(--agri-green-400);
+  --theme-surface: var(--agri-green-50);
+  --btn-text: #ffffff;
+  --theme-text: var(--text-primary);
+}
+
+/* Role-based Theme Overrides */
+body.theme-business {
+  --role-farmer: #3b82f6;
+  --theme-primary: #3b82f6;
+  --theme-primary-light: #60a5fa;
+  --theme-surface: #dbeafe;
+}
+
+body.theme-admin {
+  --role-farmer: var(--earth-yellow-600);
+  --theme-primary: var(--earth-yellow-600);
+  --theme-primary-light: var(--earth-yellow-400);
+  --theme-surface: var(--earth-yellow-50);
+}
+
+body.theme-salesman {
+  --role-farmer: #f97316;
+  --theme-primary: #f97316;
+  --theme-primary-light: #fb923c;
+  --theme-surface: #fed7aa;
+}
+
+/* Base Styles */
+body {
+  color: var(--text-primary);
+  background: var(--background-gradient);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Scale - Balanced Hierarchy */
+h1 { @apply text-2xl font-semibold text-gray-900 leading-tight; }
+h2 { @apply text-xl font-semibold text-gray-900 leading-tight; }
+h3 { @apply text-lg font-medium text-gray-900 leading-tight; }
+h4 { @apply text-base font-medium text-gray-900 leading-tight; }
+h5 { @apply text-sm font-medium text-gray-900 leading-tight; }
+h6 { @apply text-xs font-medium text-gray-700 leading-tight; }
+
+p { @apply text-sm text-gray-600 leading-relaxed; }
+small { @apply text-xs text-gray-500 leading-normal; }
+
+/* Text Utilities */
+.text-body { @apply text-sm text-gray-600; }
+.text-caption { @apply text-xs text-gray-500; }
+.text-label { @apply text-sm font-medium text-gray-700; }
+.text-title { @apply text-lg font-semibold text-gray-900; }
+
+/* ========================================
+   COMMON UI CLASSES - AGRI-TECH MARKETPLACE
+   ======================================== */
+@layer components {
+
+  /* Layout Classes */
+  .app-layout {
+    @apply min-h-screen bg-gradient-to-br from-white to-green-50;
+  }
+  
+  .app-sidebar {
+    @apply fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-green-900 to-green-800 text-white shadow-2xl z-50;
+  }
+  
+  .app-main {
+    @apply transition-all duration-300 ease-in-out bg-white min-h-screen;
+  }
+  
+  .app-page-title {
+    @apply text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3;
+  }
+  
+  .app-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+  }
+
+  /* Card Classes */
+  .app-card {
+    @apply bg-white rounded-xl border border-gray-200 transition-all duration-200 p-6;
+  }
+  
+  .app-card-hover {
+    @apply hover:border-green-300 hover:shadow-sm;
+  }
+  
+  .app-card-selected {
+    @apply ring-1 ring-green-500 bg-green-50/30;
+  }
+
+  /* Button Classes */
+  .app-button-primary {
+    @apply bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-6 rounded-lg transition-colors duration-200;
+  }
+  
+  .app-button-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2.5 px-6 rounded-lg transition-colors duration-200;
+  }
+  
+  .app-button-outline {
+    @apply border border-green-600 text-green-600 hover:bg-green-50 font-medium py-2.5 px-6 rounded-lg transition-colors duration-200;
+  }
+
+  /* Input Classes */
+  .app-input {
+    @apply border border-gray-300 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200;
+  }
+  
+  .app-input-error {
+    @apply border-red-300 focus:ring-red-500;
+  }
+
+  /* Badge Classes */
+  .app-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .app-badge-success {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .app-badge-warning {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .app-badge-error {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .app-badge-info {
+    @apply bg-blue-100 text-blue-800;
+  }
+
+  /* Tab Classes */
+  .app-tab {
+    @apply px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200;
+  }
+  
+  .app-tab-active {
+    @apply bg-green-600 text-white;
+  }
+  
+  .app-tab-inactive {
+    @apply text-gray-600 hover:text-gray-900 hover:bg-gray-50;
+  }
+
+  /* Legacy Classes (for backward compatibility) */
+  .glass-card {
+    @apply app-card;
+  }
+  .glass-card:hover {
+    @apply app-card-hover;
+  }
+  
+  .glass-button {
+    @apply app-button-primary;
+  }
+
+  /* Portal-specific card borders */
+  body.theme-business .app-card { @apply border-blue-200; }
+  body.theme-admin .app-card { @apply border-yellow-200; }
+  body.theme-salesman .app-card { @apply border-orange-200; }
+
+  /* ---- Enhanced Input Fields ---- */
+  input,
+  textarea,
+  select {
+    @apply app-input;
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply ring-2 ring-green-500 ring-offset-1 border-transparent;
+  }
+}
+
+/* ========================================
+   ANIMATIONS & KEYFRAMES
+   ======================================== */
+@layer utilities {
+  /* Crop Animation Keyframes */
+  @keyframes leafPop {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+    100% { transform: scale(1) rotate(360deg); opacity: 1; }
+  }
+  
+  @keyframes floatUp {
+    0% { transform: translateY(0px); opacity: 1; }
+    100% { transform: translateY(-20px); opacity: 0; }
+  }
+  
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+    50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+  }
+
+  /* Animation Classes */
+  .animate-leaf-pop {
+    animation: leafPop 0.6s ease-out;
+  }
+  
+  .animate-float-up {
+    animation: floatUp 1s ease-out;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulseGlow 2s infinite;
+  }
+  
+  .animate-bounce {
+    animation: bounce 1s infinite;
+  }
+
+  /* Crop Card Specific Animations */
+  .crop-card {
+    @apply app-card cursor-pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .crop-card:hover {
+    @apply app-card-hover;
+    transform: translateY(-4px) scale(1.02);
+  }
+  
+  .crop-card:active {
+    transform: translateY(-2px) scale(0.98);
+  }
+  
+  .crop-card.selected {
+    @apply app-card-selected;
+    animation: pulseGlow 2s infinite;
+  }
+
+  /* Leaf Sparkle Effect */
+  .leaf-sparkle {
+    @apply absolute pointer-events-none;
+    animation: leafPop 0.6s ease-out;
+  }
+  
+  .leaf-sparkle::before {
+    content: '🌿';
+    font-size: 1.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY & REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .crop-card:hover {
+    transform: none !important;
+  }
+  
+  .animate-leaf-pop,
+  .animate-float-up,
+  .animate-pulse-glow,
+  .animate-bounce {
+    animation: none !important;
+  }
+}
+
+/* Focus Management */
+.app-button-primary:focus,
+.app-button-secondary:focus,
+.app-button-outline:focus,
+.app-input:focus {
+  @apply outline-none ring-2 ring-green-500 ring-offset-2;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .app-card {
+    @apply border-2 border-gray-900;
+  }
+  
+  .app-button-primary {
+    @apply border-2 border-black;
+  }
+}
+
+/* ========================================
+   RESPONSIVE UTILITIES
+   ======================================== */
+@media (max-width: 1024px) {
+  .desktop-only { display: none !important; }
+  .app-sidebar { transform: translateX(-100%); }
+  .app-main { margin-left: 0 !important; }
+}
+
+@media (min-width: 1025px) {
+  .mobile-only { display: none !important; }
+}
+
+.main-content-shifted {
+  background-color: var(--background);
+  margin-left: var(--sidebar-width, 0);
+  transition: margin-left 0.5s ease;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* On Mobile/Tablet: Remove side margin and add top padding for the fixed header */
+@media (max-width: 1024px) {
+  .main-content-shifted {
+    margin-left: 0;
+    padding-top: 100px;
+  }
+}
+
+/* ========================================
+   STATUS UTILITIES
+   ======================================== */
+.status-approved { color: var(--status-success); }
+.status-pending  { color: var(--status-warning); }
+.status-rejected { color: var(--status-error); }
+
+.bg-status-approved { background-color: var(--status-success); }
+.bg-status-pending  { background-color: var(--status-warning); }
+.bg-status-rejected { background-color: var(--status-error); }
+
+/* ========================================
+   ENHANCED SCROLLBAR
+   ======================================== */
+::-webkit-scrollbar       { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--background-soft); border-radius: 4px; }
+::-webkit-scrollbar-thumb { 
+  background: var(--agri-green-400); 
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--agri-green-500); }
+
+/* ========================================
+   FOCUS STYLES
+   ======================================== */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
+}
+
+/* ========================================
+   LOADING STATES
+   ======================================== */
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ========================================
+   STATUS UTILITIES
+   ======================================== */
+.status-approved { color: var(--status-approved); }
+.status-pending  { color: var(--status-pending);  }
+.status-rejected { color: var(--status-rejected); }
+
+.bg-status-approved { background-color: var(--status-approved); }
+.bg-status-pending  { background-color: var(--status-pending);  }
+.bg-status-rejected { background-color: var(--status-rejected); }
+
+/* ========================================
+   LAYOUT UTILITIES & RESPONSIVENESS
+   ======================================== */
+@media (max-width: 1024px) {
+  .desktop-only { display: none !important; }
+}
+
+@media (min-width: 1025px) {
+  .mobile-only { display: none !important; }
+}
+
+.main-content-shifted {
+  background-color: #FFFFFF;
+  margin-left: var(--sidebar-width, 0);
+  transition: margin-left 0.5s ease;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* On Mobile/Tablet: Remove side margin and add top padding for the fixed header */
+@media (max-width: 1024px) {
+  .main-content-shifted {
+    margin-left: 0;
+    padding-top: 100px; /* Space for the floating MobileHeader */
+  }
+}
+
+aside,
+nav {
+  background-color: #FFFFFF;
+}
+
+/* Progress and Bar utilities */
+.w-dynamic {
+  width: var(--progress, 0%);
+  background-color: var(--theme-primary);
+  transition: width 0.5s ease;
+}
+
+.h-dynamic {
+  height: var(--height, 0%);
+  transition: height 0.5s ease;
+}
+
+/* Height Utilities for charts/bars to avoid inline styles */
+.h-0 { height: 0%; } .h-5 { height: 5%; } .h-10 { height: 10%; } .h-15 { height: 15%; } .h-20 { height: 20%; }
+.h-25 { height: 25%; } .h-30 { height: 30%; } .h-35 { height: 35%; } .h-40 { height: 40%; } .h-45 { height: 45%; }
+.h-50 { height: 50%; } .h-55 { height: 55%; } .h-60 { height: 60%; } .h-65 { height: 65%; } .h-70 { height: 70%; }
+.h-75 { height: 75%; } .h-80 { height: 80%; } .h-85 { height: 85%; } .h-90 { height: 90%; } .h-95 { height: 95%; }
+.h-100 { height: 100%; }
+/* Adding specific values for current charts if needed */
+.h-40 { height: 40%; } .h-45 { height: 45%; } .h-70 { height: 70%; } .h-90 { height: 90%; } .h-65 { height: 65%; }
+.h-80 { height: 80%; } .h-100 { height: 100%; }
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: #F5F5F5; }
+::-webkit-scrollbar-thumb { background: var(--theme-primary); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--theme-primary-light); }

@@ -1,0 +1,20 @@
+{
+  "name": "farmer-assistant",
+  "private": true,
+  "description": "Farmer Assistant monorepo (Express/MongoDB server + Next.js client)",
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "test": "npm --prefix server test",
+    "build": "npm --prefix client run build",
+    "lint": "npm --prefix client run lint",
+    "ci": "npm run test && npm run build && npm run lint"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "dependencies": {
+    "firebase": "^12.13.0"
+  }
+}

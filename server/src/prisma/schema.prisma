@@ -1,0 +1,163 @@
+// Farmer Assistant – Prisma Schema (Backend Sync)
+// docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Farmer / User ─────────────────────────────────────────────────────────────
+
+model Farmer {
+  id          String   @id @default(cuid())
+  name        String
+  phone       String   @unique
+  email       String?  @unique
+  role        String   @default("FARMER")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  profile     FarmerProfile?
+  crops       Crop[]
+  sales       Sale[]
+  contracts   Contract[]
+}
+
+// ─── Salesman / Contractor ─────────────────────────────────────────────────────
+
+model Salesman {
+  id          String   @id @default(cuid())
+  name        String
+  company     String?
+  phone       String   @unique
+  email       String?  @unique
+  region      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  contracts   Contract[]
+}
+
+// ─── Farm Profile & Documents ──────────────────────────────────────────────────
+
+model FarmerProfile {
+  id           String  @id @default(cuid())
+  farmerId     String  @unique
+  farmer       Farmer  @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+
+  landSize     Float   // in acres
+  soilType     String  @default("Alluvial (Loamy)")
+  location     String
+  latitude     Float?
+  longitude    Float?
+  waterSource  String  @default("Borewell")
+  hasOwnWell   Boolean @default(false)
+  fpoName      String?
+  memberSince  DateTime?
+
+  // Document Storage (Paths/URLs)
+  aadharUrl    String?
+  landRecordUrl String?
+  bankPassbookUrl String?
+  
+  aadharVerified Boolean @default(false)
+  landVerified   Boolean @default(false)
+  bankVerified   Boolean @default(false)
+}
+
+// ─── Crops ─────────────────────────────────────────────────────────────────────
+
+model Crop {
+  id          String      @id @default(cuid())
+  farmerId    String
+  farmer      Farmer      @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+
+  name        String      // e.g., "Wheat (PBW 343)"
+  variety     String?
+  landSection String?     // e.g., "Sec A (5 Acres)"
+  landSize    Float?      // in acres
+  plantedAt   DateTime    @default(now())
+  harvestedAt DateTime?
+
+  stage       String      @default("SOWING")
+  healthScore Int         @default(80) 
+  waterStatus String      @default("OPTIMAL")
+  isActive    Boolean     @default(true)
+
+  sales       Sale[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Contracts ─────────────────────────────────────────────────────────────────
+
+model Contract {
+  id          String   @id @default(cuid())
+  farmerId    String
+  farmer      Farmer   @relation(fields: [farmerId], references: [id])
+  salesmanId  String
+  salesman    Salesman @relation(fields: [salesmanId], references: [id])
+
+  cropName    String
+  pricePerQtl Float
+  quantityQtl Float
+  startDate   DateTime
+  endDate     DateTime?
+  status      String   @default("PENDING") // PENDING, ACTIVE, COMPLETED, REJECTED
+  
+  createdAt   DateTime @default(now())
+}
+
+// ─── Sales ─────────────────────────────────────────────────────────────────────
+
+model Sale {
+  id          String   @id @default(cuid())
+  farmerId    String
+  farmer      Farmer   @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  cropId      String?
+  crop        Crop?    @relation(fields: [cropId], references: [id])
+
+  quantityKg  Float
+  pricePerQtl Float    
+  totalAmount Float    
+  mandiName   String
+  soldAt      DateTime @default(now())
+  notes       String?
+
+  createdAt   DateTime @default(now())
+}
+
+// ─── Market Prices ─────────────────────────────────────────────────────────────
+
+model MarketPrice {
+  id          String   @id @default(cuid())
+  cropName    String
+  mandiName   String
+  pricePerQtl Float
+  trend       String   @default("STABLE") 
+  changePercent Float  @default(0)
+  recordedAt  DateTime @default(now())
+
+  @@index([cropName, recordedAt])
+}
+
+// ─── Industrial Partners ───────────────────────────────────────────────────────
+
+model Partner {
+  id          String   @id @default(cuid())
+  name        String
+  type        String   // e.g., "Bio-Refinery", "Feed Processor"
+  location    String
+  distance    Float    // Distance from center/farmer (simulated for now)
+  accepts     String   // e.g., "Wheat Straw, Maize Stover"
+  phone       String?
+  email       String?
+  website     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

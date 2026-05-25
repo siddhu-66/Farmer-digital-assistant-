@@ -1,0 +1,4 @@
+src/app/business/orders/create/page.tsx(51,9): error TS2561: Object literal may only specify known properties, but 'salesmanId' does not exist in type 'Partial<Order>'. Did you mean to write 'salesman'?
+src/app/business/orders/edit/[id]/page.tsx(72,43): error TS2345: Argument of type '{ customerName: string; cropName: string; quantity: string; unit: OrderUnit; expectedPrice: string; deliveryLocation: string; requiredDate: string; notes: string; }' is not assignable to parameter of type 'Partial<Order>'.
+  Types of property 'quantity' are incompatible.
+    Type 'string' is not assignable to type 'number'.

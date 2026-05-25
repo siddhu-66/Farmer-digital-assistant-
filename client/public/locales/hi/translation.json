@@ -1,0 +1,20 @@
+{
+  "greeting": "एग्रीस्मार्ट में आपका स्वागत है",
+  "ai_chat": {
+    "placeholder": "अपना कृषि प्रश्न पूछें...",
+    "voice_hint": "माइक को टैप करें और बोलें"
+  },
+  "predictions": {
+    "quality_high": "उच्च गुणवत्ता",
+    "quality_medium": "मध्यम गुणवत्ता",
+    "quality_low": "निम्न गुणवत्ता",
+    "recommend_crop": "अनुशंसित फसल"
+  },
+  "dashboard": {
+    "title": "किसान डैशबोर्ड",
+    "stats": {
+      "land": "कुल भूमि",
+      "crop": "वर्तमान फसल"
+    }
+  }
+}

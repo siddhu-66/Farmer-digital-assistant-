@@ -1,0 +1,20 @@
+{
+  "greeting": "Welcome to AgriSmart",
+  "ai_chat": {
+    "placeholder": "Ask your agriculture question...",
+    "voice_hint": "Tap the mic and speak"
+  },
+  "predictions": {
+    "quality_high": "High Quality",
+    "quality_medium": "Medium Quality",
+    "quality_low": "Low Quality",
+    "recommend_crop": "Recommended Crop"
+  },
+  "dashboard": {
+    "title": "Customer Dashboard",
+    "stats": {
+      "land": "Total Land",
+      "crop": "Current Crop"
+    }
+  }
+}

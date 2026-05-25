@@ -1,0 +1,2 @@
+﻿src/app/register/page.tsx(22,21): error TS18047: 'searchParams' is possibly 'null'.
+src/app/signin/page.tsx(17,21): error TS18047: 'searchParams' is possibly 'null'.

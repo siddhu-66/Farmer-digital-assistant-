@@ -1,0 +1,20 @@
+{
+  "greeting": "એગ્રીસ્માર્ટમાં આપનું સ્વાગત છે",
+  "ai_chat": {
+    "placeholder": "તમારો કૃષિ પ્રશ્ન પૂછો...",
+    "voice_hint": "માઇક પર ટેપ કરો અને બોલો"
+  },
+  "predictions": {
+    "quality_high": "ઉચ્ચ ગુણવત્તા",
+    "quality_medium": "મધ્યમ ગુણવત્તા",
+    "quality_low": "નબળી ગુણવત્તા",
+    "recommend_crop": "ભલામણ કરેલ પાક"
+  },
+  "dashboard": {
+    "title": "ખેડૂત ડેશબોર્ડ",
+    "stats": {
+      "land": "કુલ જમીન",
+      "crop": "વર્તમાન પાક"
+    }
+  }
+}

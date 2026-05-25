@@ -1,0 +1,94 @@
+﻿
+> frontend@0.1.0 lint
+> eslint
+
+
+C:\Users\siddh\New folder\frontend\src\app\admin\users\page.tsx
+  4:21  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+  4:49  warning  'CheckCircle' is defined but never used  @typescript-eslint/no-unused-vars
+  4:62  warning  'XCircle' is defined but never used      @typescript-eslint/no-unused-vars
+  4:71  warning  'Clock' is defined but never used        @typescript-eslint/no-unused-vars
+  9:11  warning  't' is assigned a value but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\admin\verifications\page.tsx
+  40:14  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\business\messages\page.tsx
+   4:21  warning  'MessageSquare' is defined but never used  @typescript-eslint/no-unused-vars
+   9:38  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  10:42  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\app\business\post-contract\page.tsx
+   5:33  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+   5:46  warning  'FileText' is defined but never used     @typescript-eslint/no-unused-vars
+  30:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\business\procurement\page.tsx
+  4:44  warning  'CheckCircle2' is defined but never used  @typescript-eslint/no-unused-vars
+  9:11  warning  't' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\business\projections\page.tsx
+  5:10  warning  'useLanguage' is defined but never used   @typescript-eslint/no-unused-vars
+  9:36  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\app\case-studies\page.tsx
+  3:3  warning  'Library' is defined but never used    @typescript-eslint/no-unused-vars
+  6:3  warning  'Lightbulb' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\crops\page.tsx
+  6:3  warning  'Droplets' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\dashboard\page.tsx
+  36:56  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\app\market\page.tsx
+  8:3  warning  'Filter' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\page.tsx
+  142:64  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  143:60  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  144:66  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  145:63  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\app\profile\page.tsx
+  6:3  warning  'User' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\register\page.tsx
+   5:3   warning  'Droplets' is defined but never used          @typescript-eslint/no-unused-vars
+  22:16  warning  'setRole' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\residue\page.tsx
+  5:3  warning  'Recycle' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\app\signin\page.tsx
+  95:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\components\layout\Navbar.tsx
+  3:10  warning  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  3:21  warning  'useState' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\components\layout\Sidebar.tsx
+   3:10  warning  'useRouter' is defined but never used  @typescript-eslint/no-unused-vars
+  21:3   warning  'Activity' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\components\shared\AIAssistant.tsx
+  4:37  warning  'MessageSquare' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\siddh\New folder\frontend\src\components\shared\LanguageSelector.tsx
+  37:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\context\LanguageContext.tsx
+  50:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  78:45  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\lib\api.ts
+  14:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\services\businessService.ts
+  116:45  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\siddh\New folder\frontend\src\services\cropService.ts
+  24:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 41 problems (15 errors, 26 warnings)
+
