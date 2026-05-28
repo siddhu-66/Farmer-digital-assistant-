@@ -1,13 +1,11 @@
 node_modules
 .next
-out
-build
 .env
-.env.local
-.env*.local
-*.log
-.DS_Store
-desktop.ini
+dist
+build
+coverage
+uploads
+.cache
 
 # Accidental duplicate copies
 client/server/

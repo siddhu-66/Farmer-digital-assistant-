@@ -41,7 +41,7 @@ const { weatherData, setWeatherData, moisture, activities, myListings, myBids } 
 const socketInitializer = useCallback(async () => {
   try {
     await fetch("/api/socket");
-    socket = io();
+    socket = io(process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000");
     socket.on("connect", () => setIsLive(true));
     socket.on("sensor_update", (data: { moisture: number; temp: number; npk: { n: number; p: number; k: number } }) => {
       setLiveSensors(data);
