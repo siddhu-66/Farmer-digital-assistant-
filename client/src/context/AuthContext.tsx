@@ -2,10 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { apiClient } from "@/lib/apiClient";
-import { getAuthHeaders } from "@/lib/authHeaders";
-import { getPublicApiBase } from "@/lib/getPublicApiBase";
-
-const BASE_URL = getPublicApiBase();
+import { authService } from "@/services/authService";
 
 type Role = "farmer" | "business" | "salesman" | "admin" | null;
 type Status = "pending" | "approved" | "rejected" | null;
@@ -16,6 +13,8 @@ interface AuthUserPayload {
   role: Role;
   status: Status;
   verified: boolean;
+  email?: string;
+  mobile?: string;
   country?: string;
   currency?: string;
   language?: string;
@@ -38,7 +37,8 @@ interface AuthContextType {
     id: string,
     name: string,
     status: Status,
-    verified: boolean
+    verified: boolean,
+    extras?: { email?: string; mobile?: string }
   ) => void;
   logout: () => void;
   refreshSession: () => Promise<void>;
@@ -116,26 +116,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const token = typeof window !== "undefined" ? localStorage.getItem("app_token") : null;
 
     try {
-      let response = await fetch(`${BASE_URL}/auth/me`, {
-        credentials: "include",
-        headers: getAuthHeaders(),
-      });
-
-      if (response.status === 401 && token) {
-        const refreshed = await fetch(`${BASE_URL}/auth/refresh`, {
-          method: "POST",
-          credentials: "include",
-          headers: getAuthHeaders(),
-        });
-        if (refreshed.ok) {
-          response = await fetch(`${BASE_URL}/auth/me`, {
-            credentials: "include",
-            headers: getAuthHeaders(),
-          });
-        }
-      }
-
-      if (!response.ok) {
+      const data = await authService.getMe();
+      if (data.success === false || !data.user) {
         clearAuthState({
           setRole: setRoleState,
           setUserId: setUserIdState,
@@ -147,21 +129,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      const data = await response.json();
-      if (data?.user) {
-        applyUser(
-          {
-            id: data.user.id,
-            name: data.user.name,
-            role: data.user.role as Role,
-            status: data.user.status as Status,
-            verified: Boolean(data.user.verified),
-          },
-          token
-        );
-      }
+      applyUser(
+        {
+          id: data.user.id,
+          name: data.user.name,
+          role: data.user.role as Role,
+          status: data.user.status as Status,
+          verified: Boolean(data.user.verified),
+          email: data.user.email,
+          mobile: data.user.mobile,
+        },
+        token
+      );
     } catch {
-      /* not logged in — no console noise */
+      /* not logged in */
     }
   }, [applyUser]);
 
@@ -187,7 +168,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     id: string,
     name: string,
     newStatus: Status,
-    isVerified: boolean
+    isVerified: boolean,
+    extras?: { email?: string; mobile?: string }
   ) => {
     setRoleState(newRole);
     setUserIdState(id);
@@ -200,6 +182,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       role: newRole,
       status: newStatus,
       verified: isVerified,
+      email: extras?.email,
+      mobile: extras?.mobile,
     });
     persistProfile(newRole, id, name, newStatus, isVerified, token);
   };

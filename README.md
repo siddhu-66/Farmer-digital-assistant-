@@ -1,96 +1,106 @@
-# Farmer Assistant
+# Farmer Digital Assistant
 
-Monorepo: **Express + MongoDB** API server and **Next.js** web client.
+Production-ready monorepo with:
+- `client`: Next.js frontend (App Router)
+- `server`: Express + MongoDB backend API
 
-## Folder structure
+## Final project structure
 
-```
-.
-├── client/                 # Next.js frontend (port 3000)
-│   ├── public/
+```text
+Farmer-Digital-Assistant/
+├── client/
 │   ├── src/
-│   │   ├── app/            # Pages & API routes (Next)
+│   │   ├── app/
 │   │   ├── components/
-│   │   ├── context/
 │   │   ├── hooks/
-│   │   ├── lib/            # apiClient, auth, API base URL
-│   │   └── services/
+│   │   ├── services/
+│   │   ├── lib/
+│   │   └── styles/
+│   ├── public/
 │   ├── package.json
-│   └── .env.local          # copy from .env.example
-├── server/                 # Express API (port 5000)
+│   ├── next.config.ts
+│   ├── tailwind.config.js
+│   └── .env.local
+├── server/
 │   ├── src/
-│   │   ├── app.js          # Express app
-│   │   ├── server.js       # Entry point
 │   │   ├── config/
 │   │   ├── controllers/
 │   │   ├── middleware/
 │   │   ├── models/
+│   │   ├── prisma/
 │   │   ├── routes/
 │   │   ├── services/
-│   │   └── tests/
+│   │   ├── utils/
+│   │   ├── validations/
+│   │   ├── app.js
+│   │   └── server.js
+│   ├── uploads/
+│   ├── tests/
 │   ├── package.json
-│   └── .env                # copy from .env.example
-├── ml-service/             # Optional Python ML helpers
-├── docs/
-├── package.json            # Root scripts (dev, ci)
+│   └── .env
+├── package.json
 └── README.md
+```
+
+## Environment setup
+
+### `server/.env`
+
+```env
+PORT=5000
+MONGO_URI=
+JWT_SECRET=
+```
+
+### `client/.env.local`
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
 ```
 
 ## Install
 
-From the repository root:
+From repository root:
 
 ```bash
 npm install
-cd server && npm install && cd ..
-cd client && npm install && cd ..
-```
-
-Or install each package once:
-
-```bash
 npm --prefix server install
 npm --prefix client install
 ```
 
-## Environment variables
-
-### `server/.env` (copy from `server/.env.example`)
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `PORT` | Yes (dev) | Must be `5000` locally |
-| `MONGO_URI` | Yes | MongoDB connection string |
-| `FRONTEND_ORIGIN` | Yes | `http://localhost:3000` (CORS) |
-| `JWT_SECRET` | Dev optional | Min 16 characters |
-| `OPENWEATHER_API_KEY` | Optional | Live pincode weather |
-
-### `client/.env.local` (copy from `client/.env.example`)
-
-| Variable | Description |
-|----------|-------------|
-| `NEXT_PUBLIC_BACKEND_URL` | `http://localhost:5000` |
-| `NEXT_PUBLIC_API_URL` | `http://localhost:5000` |
-| `BACKEND_URL` | `http://localhost:5000` (Next rewrites) |
-
-Use **localhost** (not `127.0.0.1`) so cookies and CORS match.
-
-## Development
-
-Start MongoDB, then from the repo root:
+## Run in development
 
 ```bash
+# both apps
 npm run dev
+
+# backend only
+npm run dev:server
+
+# frontend only
+npm run dev:client
 ```
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Client + server together |
-| `npm run dev:client` | http://localhost:3000 |
-| `npm run dev:server` | http://localhost:5000 |
-| `npm run build` | Production Next.js build |
-| `npm run ci` | Server tests + client build + lint |
+- Frontend: `http://localhost:3000`
+- Backend: `http://localhost:5000`
+- Health route: `http://localhost:5000/api/health`
 
-Health check: http://localhost:5000/api/health
+## Build and verify
 
-More detail: **[docs/LOCAL_DEVELOPMENT.md](docs/LOCAL_DEVELOPMENT.md)**
+```bash
+# backend tests
+npm --prefix server test
+
+# frontend type/build checks
+npm --prefix client run lint
+npm --prefix client run build
+```
+
+## Core features
+
+- Role-based flows: Farmer, Business, Admin
+- Auth with cookie + token fallback support
+- Sell-request workflow (`PENDING` → `FORWARDED_TO_BUSINESS` → business decision)
+- Crop listings, bids, orders, schemes, partner and market/weather modules
+- Centralized API client and env-driven API base URLs

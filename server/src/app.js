@@ -35,7 +35,7 @@ app.use(mongoSanitize());
 
 app.use(apiLimiter());
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Add global scaling context to all API responses
 app.use(addGlobalContext);
@@ -63,8 +63,8 @@ app.use('/api/chat', require('./routes/aiRoutes')); // Multilingual AI Chat Inte
 app.use('/api/location', require('./routes/location')); // Pincode-based location services
 app.use('/api/ml', require('./routes/ml')); // ML integration for quality and price prediction
 app.use('/api/market-prices', require('./routes/market')); // Market prices with fallback data
-app.use('/api/market', require('./src/routes/market')); // Pincode-based mandi prices
-app.use('/api/weather', require('./src/routes/weather')); // Pincode-based weather
+app.use('/api/market', require('./routes/market')); // Market prices
+app.use('/api/weather', require('./routes/weather')); // Pincode-based weather
 app.use('/api/assistant', require('./routes/assistant')); // Voice assistant
 
 app.use(notFound);

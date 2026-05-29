@@ -5,6 +5,19 @@ const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../ut
 
 const TEST_EMAILS = ['admin@test.com', 'farmer@test.com', 'sales@test.com'];
 
+function toPublicUser(user) {
+  return {
+    id: user.id,
+    name: user.name,
+    role: user.role,
+    status: user.status,
+    verified: user.verified,
+    email: user.email || undefined,
+    mobile: user.mobile || undefined,
+    createdAt: user.createdAt,
+  };
+}
+
 function resolveLoginQuery(identifierRaw, mobileRaw) {
   const identifier = (identifierRaw || '').trim();
   const digits = identifier.replace(/\D/g, '');
@@ -28,20 +41,11 @@ function sendAuthSuccess(res, user) {
   const refresh = signRefreshToken(user);
   setAuthCookies(res, access, refresh);
 
-  const body = {
+  res.json({
     success: true,
     token: access,
-    user: {
-      id: user.id,
-      name: user.name,
-      role: user.role,
-      status: user.status,
-      verified: user.verified,
-      email: user.email,
-      mobile: user.mobile,
-    },
-  };
-  res.json(body);
+    user: toPublicUser(user),
+  });
 }
 
 exports.register = async (req, res) => {
@@ -76,15 +80,7 @@ exports.register = async (req, res) => {
     res.status(201).json({
       success: true,
       token: access,
-      user: {
-        id: u.id,
-        name: u.name,
-        role: u.role,
-        status: u.status,
-        verified: u.verified,
-        email: u.email,
-        mobile: u.mobile,
-      },
+      user: toPublicUser(u),
     });
   } catch (err) {
     res.status(500).json({
@@ -161,18 +157,7 @@ exports.me = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     if (!user) return res.status(401).json({ success: false, message: 'Unauthorized' });
-    res.json({
-      success: true,
-      user: {
-        id: user.id,
-        name: user.name,
-        role: user.role,
-        status: user.status,
-        verified: user.verified,
-        email: user.email,
-        mobile: user.mobile,
-      },
-    });
+    res.json({ success: true, user: toPublicUser(user) });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Server Error' });
   }

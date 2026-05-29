@@ -7,39 +7,89 @@ import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAuth } from '@/context/AuthContext';
 import { farmerRegistrationService } from '@/services/farmerRegistrationService';
+import { userService } from '@/services/userService';
 import SalesmanProfile from '@/components/profile/SalesmanProfile';
-const AdminProfile = React.lazy(() => import('@/components/profile/AdminProfile')); type Language = 'en' | 'hi' | 'pa' | 'mr' | 'te'; export default function Profile() { const { role, logout, userName } = useAuth(); const [isEditing, setIsEditing] = useState(false); const { t, language, setLanguage } = useLanguage(); const [profile, setProfile] = useState<any>(null); const [loading, setLoading] = useState(true); useEffect(() => {
-    if (role !== 'farmer') {
-      setLoading(false);
-      return;
-    }
-    farmerRegistrationService
-      .getFarmerStatus()
-      .then((data) => {
-        setProfile(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, [role]); const [pushEnabled, setPushEnabled] = useState(() => { if (typeof window !== 'undefined') return localStorage.getItem('pushNotif') !== 'false'; return true; }); const [smsEnabled, setSmsEnabled] = useState(() => { if (typeof window !== 'undefined') return localStorage.getItem('smsNotif') !== 'false'; return true; }); const togglePush = () => { const n = !pushEnabled; setPushEnabled(n); localStorage.setItem('pushNotif', String(n)); }; const toggleSms = () => { const n = !smsEnabled; setSmsEnabled(n); localStorage.setItem('smsNotif', String(n)); }; const languages: { code: Language; label: string }[] = [ { code: 'en', label: 'English' }, { code: 'hi', label: 'हिंदी' }, { code: 'pa', label: 'ਪੰਜਾਬੀ' }, { code: 'mr', label: 'मराठी' }, { code: 'te', label: 'తెలుగు' }, ]; if (loading) { return ( <div className="flex bg-[var(--theme-bg)] min-h-screen relative"> <Sidebar /> <main className="flex-1 main-content-shifted p-8 pt-10 flex items-center justify-center"> <div className="animate-pulse text-primary font-bold">Loading Profile...</div> </main> </div> ); } const contractor = profile?.contracts?.[0]?.salesman;
+const AdminProfile = React.lazy(() => import('@/components/profile/AdminProfile')); type Language = 'en' | 'hi' | 'pa' | 'mr' | 'te'; export default function Profile() {
+  const { role, logout, userName, user, userId, authReady } = useAuth();
+  const [isEditing, setIsEditing] = useState(false);
+  const { t, language, setLanguage } = useLanguage();
+  const [profile, setProfile] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState(user);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setCurrentUser(user);
+  }, [user]);
+
+  useEffect(() => {
+    if (!authReady) return;
+
+    let cancelled = false;
+    (async () => {
+      try {
+        const me = await userService.getCurrentUser();
+        if (!cancelled && me) {
+          setCurrentUser({
+            id: me.id,
+            name: me.name,
+            role: me.role,
+            status: me.status as 'pending' | 'approved' | 'rejected',
+            verified: me.verified,
+            email: me.email,
+            mobile: me.mobile,
+          });
+        }
+      } catch {
+        /* keep context user */
+      }
+
+      if (role === 'farmer') {
+        try {
+          const data = await farmerRegistrationService.getFarmerStatus();
+          if (!cancelled) setProfile(data);
+        } catch {
+          /* farmer extension optional */
+        }
+      }
+
+      if (!cancelled) setLoading(false);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [role, authReady]); const [pushEnabled, setPushEnabled] = useState(() => { if (typeof window !== 'undefined') return localStorage.getItem('pushNotif') !== 'false'; return true; }); const [smsEnabled, setSmsEnabled] = useState(() => { if (typeof window !== 'undefined') return localStorage.getItem('smsNotif') !== 'false'; return true; }); const togglePush = () => { const n = !pushEnabled; setPushEnabled(n); localStorage.setItem('pushNotif', String(n)); }; const toggleSms = () => { const n = !smsEnabled; setSmsEnabled(n); localStorage.setItem('smsNotif', String(n)); }; const languages: { code: Language; label: string }[] = [ { code: 'en', label: 'English' }, { code: 'hi', label: 'हिंदी' }, { code: 'pa', label: 'ਪੰਜਾਬੀ' }, { code: 'mr', label: 'मराठी' }, { code: 'te', label: 'తెలుగు' }, ]; if (loading) { return ( <div className="flex bg-[var(--theme-bg)] min-h-screen relative"> <Sidebar /> <main className="flex-1 main-content-shifted p-8 pt-10 flex items-center justify-center"> <div className="animate-pulse text-primary font-bold">Loading Profile...</div> </main> </div> ); }   const contractor = profile?.contracts?.[0]?.salesman;
   const backHref = role === 'admin' ? '/admin' : role === 'business' ? '/business' : '/dashboard';
+  const displayName = currentUser?.name || userName || '';
+  const displayPhone = currentUser?.mobile || profile?.phone || '';
+  const displayEmail = currentUser?.email || '';
+  const displayId = currentUser?.id || userId || '';
+  const displayLocation =
+    role === 'admin'
+      ? t('profile.roles.adminLocation')
+      : role === 'business' || role === 'salesman'
+        ? 'Global Operations Center'
+        : profile?.location || t('data.location');
 
   return ( <div className="flex bg-[var(--theme-bg)] min-h-screen relative font-inter"> <Sidebar /> <main className="flex-1 main-content-shifted p-8 pt-10"> <header className="mb-10 flex justify-between items-end"> <div className="flex items-center gap-6"> 
-    <div className="w-24 h-24 bg-primary text-gray-500 flex items-center justify-center text-4xl font-bold rounded-3xl shadow-2xl shadow-primary/30"> {role === 'admin' ? 'AD' : (role === 'business' || role === 'salesman') ? (userName?.substring(0, 2).toUpperCase() || 'SM') : (profile?.name?.substring(0, 2).toUpperCase() || 'RS')}
+    <div className="w-24 h-24 bg-primary text-gray-500 flex items-center justify-center text-4xl font-bold rounded-3xl shadow-2xl shadow-primary/30"> {(displayName || 'U').substring(0, 2).toUpperCase()}
     </div> <div> 
       <div className="flex items-center gap-3 mb-1">
         <Link href={backHref} className="p-2 hover:bg-gray-100 rounded-xl text-gray-400 hover:text-gray-900 transition-colors" title="Back to Dashboard">
           <ArrowLeft className="w-5 h-5" />
         </Link>
-        <h1 className="text-4xl font-black"> {role === 'admin' ? t('profile.roles.adminTitle') : (role === 'business' || role === 'salesman') ? (userName || 'Sales Representative') : (profile?.name || 'Ram Singh')}
+        <h1 className="text-4xl font-black"> {displayName || t('profile.roles.adminTitle')}
         </h1> 
       </div>
-      <p className="text-gray-500 flex items-center gap-2"> <MapPin className="w-4 h-4" /> {role === 'admin' ? t('profile.roles.adminLocation') : (role === 'business' || role === 'salesman') ? 'Global Operations Center' : (profile?.location || t('data.location'))} • {t('profile.id')}: {role === 'admin' ? '#A-001' : (role === 'business' || role === 'salesman') ? '#S-5042' : (profile?.id?.substring(0, 8) || '#F-90231')}
+      <p className="text-gray-500 flex items-center gap-2"> <MapPin className="w-4 h-4" /> {displayLocation} • {t('profile.id')}: #{displayId.substring(0, 8)}
+      {displayPhone ? ` • ${displayPhone}` : ''}
+      {displayEmail ? ` • ${displayEmail}` : ''}
       </p> </div> </div> <button onClick={() => setIsEditing(true)} className="glass-button flex items-center gap-2 active:scale-95" > <Edit2 className="w-4 h-4" /> {t('profile.editBtn')}
 </button> </header> {/* Edit Profile Modal */} {isEditing && ( <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 pb-20"> <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => setIsEditing(false)}></div> <div className="glass-card p-8 max-w-lg w-full relative z-10 animate-in fade-in zoom-in duration-300"> <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-gradient"> <Edit2 className="w-6 h-6 text-primary" /> {t('profile.editModal.title')}
 </h2> <div className="space-y-4"> <div className="grid grid-cols-2 gap-4"> <div className="space-y-2"> <label htmlFor="edit-fullname" className="text-xs font-bold text-gray-500 uppercase">{t('profile.editModal.name')}
-</label> <input id="edit-fullname" type="text" defaultValue={role === 'admin' ? t('profile.roles.adminTitle') : (role === 'business' || role === 'salesman') ? (userName || 'Sales Representative') : (profile?.name || 'Ram Singh')} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary outline-none" /> </div> <div className="space-y-2"> <label htmlFor="edit-phone" className="text-xs font-bold text-gray-500 uppercase">{t('profile.editModal.phone')}
-</label> <input id="edit-phone" type="text" defaultValue={role === 'salesman' ? '+1 800 555 4321' : (profile?.phone || "+91 98765 43210")} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary outline-none" /> </div> </div> <div className="space-y-2"> <label htmlFor="edit-location" className="text-xs font-bold text-gray-500 uppercase">{t('profile.editModal.location')}
-</label> <input id="edit-location" type="text" defaultValue={role === 'admin' ? t('profile.roles.adminLocation') : (role === 'business' || role === 'salesman') ? 'Global Operations Center' : (profile?.location || t('data.location'))} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary outline-none" /> </div> </div> <div className="flex gap-4 mt-8"> <button onClick={() => setIsEditing(false)} className="flex-1 py-3 px-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all font-bold"> {t('profile.editModal.cancel')}
+</label> <input id="edit-fullname" type="text" defaultValue={displayName} readOnly className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary outline-none" /> </div> <div className="space-y-2"> <label htmlFor="edit-phone" className="text-xs font-bold text-gray-500 uppercase">{t('profile.editModal.phone')}
+</label> <input id="edit-phone" type="text" defaultValue={displayPhone} readOnly className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary outline-none" /> </div> </div> <div className="space-y-2"> <label htmlFor="edit-location" className="text-xs font-bold text-gray-500 uppercase">{t('profile.editModal.location')}
+</label> <input id="edit-location" type="text" defaultValue={displayLocation} readOnly className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary outline-none" /> </div> </div> <div className="flex gap-4 mt-8"> <button onClick={() => setIsEditing(false)} className="flex-1 py-3 px-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all font-bold"> {t('profile.editModal.cancel')}
 </button> <button onClick={() => { alert("Changes saved successfully!"); setIsEditing(false); }} className="flex-1 py-3 px-4 glass-button font-bold"> {t('profile.editModal.save')}
 </button> </div> </div> </div> )} {(role === 'business' || role === 'salesman') ? ( <SalesmanProfile /> ) : role === 'admin' ? ( <AdminProfile /> ) : ( <div className="grid grid-cols-1 lg:grid-cols-3 gap-8"> <div className="lg:col-span-2 space-y-8"> <div className="glass-card p-8"> <h2 className="text-2xl font-bold mb-8 flex items-center gap-3"> <Landmark className="w-6 h-6 text-primary" /> {t('profile.resources.title')}
 </h2> <div className="grid md:grid-cols-2 gap-10"> <div className="space-y-6"> <div> <p className="text-sm text-gray-500 uppercase font-bold tracking-wider mb-2">{t('profile.resources.holding')}

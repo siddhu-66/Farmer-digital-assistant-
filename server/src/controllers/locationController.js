@@ -1,5 +1,5 @@
 const axios = require('axios');
-const Pincode = require('../src/models/Pincode');
+const Pincode = require('../models/Pincode');
 
 // Weather API (using OpenWeatherMap)
 const WEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;

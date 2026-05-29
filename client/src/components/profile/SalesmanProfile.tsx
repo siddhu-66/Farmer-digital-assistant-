@@ -8,22 +8,22 @@ import { useAuth } from '@/context/AuthContext';
 
 export default function SalesmanProfile() {
   const { t, tObj } = useLanguage();
-  const { userName, userId } = useAuth();
+  const { userName, userId, user } = useAuth();
   const [profile, setProfile] = useState<SalesmanProfileType | null>(null);
 
   useEffect(() => {
-    const stored = salesmanService.getSalesmanProfile() || {
-      name: userName || 'Corporate Sales Associate',
-      id: userId || 'S-5042',
-      company: 'AgriSmart Enterprise',
-      region: 'National Branch',
-      territory: 'North-West Zone',
-      experience: 5,
-      mobile: '+1 800 555 4321',
-      email: 'sales@agrismart.com'
-    };
-    setProfile(stored as SalesmanProfileType);
-  }, [userName, userId]);
+    const stored = salesmanService.getSalesmanProfile();
+    setProfile({
+      name: user?.name || userName || stored?.name || '',
+      id: user?.id || userId || stored?.id || '',
+      company: stored?.company || '',
+      region: stored?.region || '',
+      territory: stored?.territory || '',
+      experience: stored?.experience ?? 0,
+      mobile: user?.mobile || stored?.mobile || '',
+      email: user?.email || stored?.email || '',
+    } as SalesmanProfileType);
+  }, [userName, userId, user]);
 
   const stats = [
     { label: t('profile.salesman.purchases'), value: '450 Tons', icon: TrendingUp, color: 'text-primary' },

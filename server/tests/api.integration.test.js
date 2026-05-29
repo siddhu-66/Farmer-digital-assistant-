@@ -7,8 +7,8 @@ process.env.JWT_SECRET = 'test-jwt-secret-minimum-16-chars';
 const request = require('supertest');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const User = require('../models/User');
-const Business = require('../models/Business');
+const User = require('../src/models/User');
+const Business = require('../src/models/Business');
 
 let mongoServer;
 let app;
@@ -28,7 +28,7 @@ describe('Security & API integration', () => {
     });
     process.env.MONGO_URI = mongoServer.getUri();
     await mongoose.connect(process.env.MONGO_URI);
-    app = require('../app');
+    app = require('../src/app');
   }, 600000);
 
   afterAll(async () => {
@@ -55,6 +55,16 @@ describe('Security & API integration', () => {
     const login = await agent.post('/api/auth/login').send({ mobile: '9876543210', password: 'password123' });
     expect(login.status).toBe(200);
     expect(login.body.token).toBeTruthy();
+  });
+
+  it('GET /api/auth/me returns current user', async () => {
+    const agent = request.agent(app);
+    const token = await registerAndToken(agent, '9888888888', 'farmer', 'Me User');
+    const me = await agent.get('/api/auth/me').set('x-auth-token', token);
+    expect(me.status).toBe(200);
+    expect(me.body.success).toBe(true);
+    expect(me.body.user.name).toBe('Me User');
+    expect(me.body.user.mobile).toBe('9888888888');
   });
 
   it('listing CRUD: create, list all, my listings, patch', async () => {

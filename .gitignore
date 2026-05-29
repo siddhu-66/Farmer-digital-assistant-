@@ -1,12 +1,9 @@
 node_modules
 .next
 .env
+.env.local
 dist
 build
 coverage
 uploads
 .cache
-
-# Accidental duplicate copies
-client/server/
-server/client/

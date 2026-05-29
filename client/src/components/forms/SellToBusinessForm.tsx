@@ -29,7 +29,11 @@ const removeImage = (index: number) => { setFormData(prev => ({ ...prev, images:
 const getStepTitle = () => { switch(step) { case 1: return "Pick your crop"; case 2: return "Add its weight"; case 3: return "Quality Verification"; case 4: return "Instantly see how much profit you can make!"; default: return "All Done!"; } };
 const getStepSubtitle = () => { switch(step) { case 1: return "Select the crop you want to sell to " + company.name; case 2: return "Tell us the total quantity in Quintals"; case 3: return "Upload minimum 3 images of your crop for Admin review"; case 4: return "Review your expected earnings and confirm the sale."; default: return "Your request has been sent successfully."; } };
 const analyzeImages = async () => { setIsAnalyzing(true); try {
-  const res = await fetch('http://localhost:8000/analyze/quality', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ images: formData.images }) });
+  const mlApiBase = (process.env.NEXT_PUBLIC_ML_API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api').replace(/\/$/, '');
+  const analyzeUrl = mlApiBase.endsWith('/api')
+    ? `${mlApiBase}/ml/analyze/quality`
+    : `${mlApiBase}/analyze/quality`;
+  const res = await fetch(analyzeUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ images: formData.images }) });
 if (!res.ok) throw new Error('ML Analysis failed');
 const data = await res.json(); setMlResult({ tier: data.quality_tier, multiplier: data.price_multiplier, confidence: data.confidence }); } catch (err) { console.error(err); setMlResult({ tier: 'Standard', multiplier: 1.0, confidence: 0.85 }); } finally { setIsAnalyzing(false); setStep(4); } };
 const handleSubmit = (e: React.FormEvent) => { e.preventDefault();

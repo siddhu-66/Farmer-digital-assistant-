@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
-const Pincode = require('../src/models/Pincode');
+const Pincode = require('../models/Pincode');
 const connectDB = require('../config/db');
 
 // Sample CSV data - replace with your actual CSV file path

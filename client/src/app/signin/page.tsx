@@ -67,7 +67,11 @@ const [loading, setLoading] = useState(false);
           response.user.id,
           response.user.name,
           response.user.status as 'pending' | 'approved' | 'rejected',
-          response.user.verified
+          response.user.verified,
+          {
+            email: (response.user as { email?: string }).email,
+            mobile: (response.user as { mobile?: string }).mobile,
+          }
         );
         
         // Handle pending status
